@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PointageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PointageRepository::class)
@@ -29,11 +30,13 @@ class Pointage
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="pointages")
+     * @Assert\NotBlank
      */
     private $Matricule_utilisateur;
 
     /**
-     * @ORM\OneToOne(targetEntity=Chantier::class, inversedBy="pointage_chantier", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Chantier::class, inversedBy="pointage_chantier")
+     * @Assert\NotBlank
      */
     private $Chantier_pointage;
 

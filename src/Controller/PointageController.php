@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Debug\Debug;
 
+
 /**
  * @Route("/pointage")
  */
@@ -21,27 +22,40 @@ class PointageController extends AbstractController
     /**
      * @Route("/", name="pointage_index", methods={"GET"})
      */
-    public function index(PointageRepository $pointageRepository): Response
+    public function index(PointageRepository $pointageRepository, UtilisateurRepository $UtilisateurRepository): Response
     {
+      // $id = $pointageRepository->() ?? Null;
+      $Utilisateur = $UtilisateurRepository->findAll();
         return $this->render('pointage/index.html.twig', [
             'pointages' => $pointageRepository->findAll(),
+            'utilisateur' => $Utilisateur,
         ]);
     }
 
     /**
      * @Route("/new", name="pointage_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UtilisateurRepository $UtilisateurRepository, PointageRepository $PointageRepository): Response
     {
+
         $pointage = new Pointage();
+        $PointageR = $PointageRepository;
         $form = $this->createForm(PointageType::class, $pointage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $date = $form->getData()->getDate();
+            $matricule = $form->getData()->getMatriculeUtilisateur();
+            if($matricule) {
+              //find date de pointage par matricule
+              $user = $PointageRepository->findOneById(1);
+              // dd($user);
+            }
+
+
             $entityManager->persist($pointage);
             $entityManager->flush();
-
             return $this->redirectToRoute('pointage_index');
         }
 

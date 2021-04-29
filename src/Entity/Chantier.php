@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ChantierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=ChantierRepository::class)
@@ -102,6 +103,6 @@ class Chantier
 
     public function __toString()
     {
-        return $this->Nom;
+        return $this->getNom();
     }
 }

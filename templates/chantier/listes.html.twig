@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chantier Listes{% endblock %}
+
+{% block body %}
+    <h1>Chantier Listes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>DateDebut</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chantiers in chantier %}
+        <tr>
+            <td>{{ chantier.id }}</td>
+            <td>{{ chantier.Nom }}</td>
+            <td>{{ chantier.Adresse }}</td>
+            <td>{{ chantier.DateDebut ? chantier.DateDebut|date('Y-m-d') : '' }}</td>
+          
+        </tr>
+      {% endfor %}
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('chantier_new') }}">Create new</a>
+
+{% endblock %}

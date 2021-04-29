@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
+use App\Entity\Pointage;
 use App\Entity\Chantier;
 use App\Form\ChantierType;
 use App\Repository\ChantierRepository;
@@ -9,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/chantier")
@@ -58,6 +61,7 @@ class ChantierController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="chantier_edit", methods={"GET","POST"})
      */
@@ -91,4 +95,17 @@ class ChantierController extends AbstractController
 
         return $this->redirectToRoute('chantier_index');
     }
+
+    /**
+     * @Route("/list", name="chantier_list")
+     */
+    public function list(): Response
+    {
+      $entityManager = $this->getDoctrine()->getManager();
+      $chantier = $entityManager->getRepository(Chantier::class)->findAll();
+        return $this->render('chantier/listes.html.twig', [
+            'chantier' => $chantier,
+        ]);
+    }
+
 }
