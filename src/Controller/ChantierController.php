@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
@@ -18,6 +19,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
  */
 class ChantierController extends AbstractController
 {
+
+  /**
+   * @Route("/list", name="list", methods={"GET"})
+   */
+  public function list(): Response
+  {
+    $entityManager = $this->getDoctrine()->getManager();
+    $chantier = $entityManager->getRepository(Chantier::class)->findAll();
+    $pointage = $entityManager->getRepository(Pointage::class)->findAll();
+      return $this->render('chantier/listes.html.twig', [
+          'chantier' => $chantier,
+          'pointage' => $pointage,
+      ]);
+  }
+
     /**
      * @Route("/", name="chantier_index", methods={"GET"})
      */
@@ -94,18 +110,6 @@ class ChantierController extends AbstractController
         }
 
         return $this->redirectToRoute('chantier_index');
-    }
-
-    /**
-     * @Route("/list", name="chantier_list")
-     */
-    public function list(): Response
-    {
-      $entityManager = $this->getDoctrine()->getManager();
-      $chantier = $entityManager->getRepository(Chantier::class)->findAll();
-        return $this->render('chantier/listes.html.twig', [
-            'chantier' => $chantier,
-        ]);
     }
 
 }

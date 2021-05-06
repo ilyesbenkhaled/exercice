@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\ChantierRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ ** @ORM\Table(name="chantier")
  * @ORM\Entity(repositoryClass=ChantierRepository::class)
  */
 class Chantier

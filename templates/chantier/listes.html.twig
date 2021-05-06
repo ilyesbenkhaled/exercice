@@ -8,22 +8,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>DateDebut</th>
+                <th scope="col">Id</th>
+                <th scope="col"> Nom</th>
+                <th scope="col">le nombre d’heures cumulés pointés sur ce chantier</th>
+                <th scope="col">le nombre de personne pointé sur ce chantier</th>
             </tr>
         </thead>
         <tbody>
+        {% for pointages in pointage %}
         {% for chantiers in chantier %}
         <tr>
-            <td>{{ chantier.id }}</td>
-            <td>{{ chantier.Nom }}</td>
-            <td>{{ chantier.Adresse }}</td>
-            <td>{{ chantier.DateDebut ? chantier.DateDebut|date('Y-m-d') : '' }}</td>
-          
+            <td>{{ chantiers.id }}</td>
+            <td>{{ chantiers.Nom }}</td>
+            <td>{{ pointages.Duree ? pointages.Duree|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ pointages.Chantier_pointage|length }}</td>
+
         </tr>
       {% endfor %}
+            {% endfor %}
 
         </tbody>
     </table>

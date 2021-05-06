@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PointageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=PointageRepository::class)
@@ -38,7 +39,11 @@ class Pointage
      * @ORM\ManyToOne(targetEntity=Chantier::class, inversedBy="pointage_chantier")
      * @Assert\NotBlank
      */
-    private $Chantier_pointage;
+    public $Chantier_pointage;
+
+    public function __construct() {
+      $this->Chantier_pointage = new ArrayCollection();
+     }
 
     public function getId(): ?int
     {
