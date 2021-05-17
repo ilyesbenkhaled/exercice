@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ pointage.id }}</td>
                 <td>{{ pointage.Date ? pointage.Date|date('Y-m-d') : '' }}</td>
-                <td>{{ pointage.Duree ? pointage.Duree|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ pointage.Duree ? pointage.Duree|date('H:i') : '' }}</td>
                 <td>
                     <a href="{{ path('pointage_show', {'id': pointage.id}) }}">show</a>
                     <a href="{{ path('pointage_edit', {'id': pointage.id}) }}">edit</a>

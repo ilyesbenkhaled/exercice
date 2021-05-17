@@ -20,7 +20,7 @@
         <tr>
             <td>{{ chantiers.id }}</td>
             <td>{{ chantiers.Nom }}</td>
-            <td>{{ pointages.Duree ? pointages.Duree|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ pointages.Duree ? pointages.Duree|date('H:i:s') : '' }}</td>
             <td>{{ pointages.Chantier_pointage|length }}</td>
 
         </tr>

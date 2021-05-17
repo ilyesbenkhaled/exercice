@@ -41,9 +41,7 @@ class Pointage
      */
     public $Chantier_pointage;
 
-    public function __construct() {
-      $this->Chantier_pointage = new ArrayCollection();
-     }
+
 
     public function getId(): ?int
     {

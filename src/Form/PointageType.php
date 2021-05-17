@@ -6,6 +6,9 @@ use App\Entity\Pointage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+
 
 class PointageType extends AbstractType
 {
@@ -13,7 +16,10 @@ class PointageType extends AbstractType
     {
         $builder
             ->add('Date')
-            ->add('Duree')
+            ->add('Duree', TimeType::class, [
+              'input'  => 'datetime',
+              'widget' => 'choice',
+            ])
             ->add('Matricule_utilisateur')
             ->add('Chantier_pointage')
         ;
