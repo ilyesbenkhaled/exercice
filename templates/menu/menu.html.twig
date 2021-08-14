@@ -2,9 +2,14 @@
 {% block header %}
 <header>
 <div class="topnav">
-  <a class="active" href="/utilisateur">Utilisateur</a>
+  <a class="active" href="/register">Register</a>
+  <a href="/utilisateur">Utilisateur</a>
   <a href="/pointage">Pointage</a>
   <a href="/chantier">Chantier</a>
+
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  <a href="/logout">Logout</a>
+{% endif %}
 </div>
 
 <div style="padding-bottom:26px">
