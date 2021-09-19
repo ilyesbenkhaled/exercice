@@ -99,6 +99,7 @@ class ChantierController extends AbstractController
     }
 
     /**
+    *Auth Khaled ILyes
      * @Route("/{id}", name="chantier_delete", methods={"POST"})
      */
     public function delete(Request $request, Chantier $chantier): Response
